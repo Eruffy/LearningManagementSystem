@@ -1,9 +1,8 @@
-Learning Management System (LMS) - Software Evolution and Maintenance
+**Learning Management System (LMS) - Software Evolution and Maintenance**
 
 This Java-based Learning Management System (LMS) was enhanced through a collaborative software maintenance project. The team implemented bug fixes and feature enhancements to improve functionality, conducted static code analysis with SonarQube, and documented the system architecture using UML diagrams via reverse engineering.
 
-Project Overview
-
+**Project Overview**
 The LMS supports educational processes such as course management, user roles, and content delivery. This project focused on maintaining and evolving the system by:
 
 
@@ -50,8 +49,7 @@ UML Documentation: Created UML diagrams via reverse engineering to visualize sys
 
 Change Management: Tracked changes via an online ticketing system (e.g., Jira, Bugzilla).
 
-Tech Stack
-
+**Tech Stack**
 
 
 
@@ -74,9 +72,9 @@ UML Tool: [PlantUML, Enterprise Architect, or specify your tool] for reverse-eng
 
 Optional: [Spring Boot for APIs, Hibernate for database, if used].
 
-Project Phases
+**Project Phases**
 
-Phase 1 (Completed by 8/5/2024)
+-Phase 1 (Completed by 8/5/2024)
 
 
 
@@ -96,7 +94,7 @@ Ran SonarQube for initial code quality analysis, generating reports to identify 
 
 Registered change requests in [ticketing system, e.g., Jira, Bugzilla] and tracked progress via updates.
 
-Phase 2 (Completed by 18/5/2024)
+-Phase 2 (Completed by 18/5/2024)
 
 
 
