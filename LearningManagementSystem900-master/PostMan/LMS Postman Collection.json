@@ -1,0 +1,651 @@
+{
+  "info": {
+    "name": "Learning Management System API",
+    "description": "Postman Collection for all LMS API endpoints covering user management, course management, assessments, notifications, and performance tracking.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "User Management",
+      "item": [
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\": \"student@example.com\", \"password\": \"password123\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/users/login",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "login"]
+            },
+            "description": "Logs in a user with email and password."
+          }
+        },
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Doe\", \"email\": \"john@example.com\", \"password\": \"password123\", \"role\": \"Student\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/users/register",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "register"]
+            },
+            "description": "Registers a new user (Admin, Instructor, or Student)."
+          }
+        },
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users"]
+            },
+            "description": "Retrieves all users."
+          }
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "1"]
+            },
+            "description": "Retrieves a user by their ID."
+          }
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\": \"John Updated\", \"email\": \"john.updated@example.com\", \"password\": \"newpassword\", \"role\": \"Student\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "1"]
+            },
+            "description": "Updates a user’s details by ID."
+          }
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "1"]
+            },
+            "description": "Deletes a user by ID."
+          }
+        },
+        {
+          "name": "List Users by Role",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/list?role=Student",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "list"],
+              "query": [
+                {
+                  "key": "role",
+                  "value": "Student"
+                }
+              ]
+            },
+            "description": "Lists users filtered by role (Student, Instructor, Admin)."
+          }
+        },
+        {
+          "name": "Enroll Student in Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/1/enroll?courseId=course123",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "1", "enroll"],
+              "query": [
+                {
+                  "key": "courseId",
+                  "value": "course123"
+                }
+              ]
+            },
+            "description": "Enrolls a student in a course."
+          }
+        },
+        {
+          "name": "Assign Instructor to Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/2/assign/course123",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "2", "assign", "course123"]
+            },
+            "description": "Assigns an instructor to a course."
+          }
+        },
+        {
+          "name": "Generate OTP for Lesson",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/generate-otp/2/course123/lesson456",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "generate-otp", "2", "course123", "lesson456"]
+            },
+            "description": "Generates an OTP for a lesson (instructor action)."
+          }
+        },
+        {
+          "name": "Mark Attendance",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/users/mark-attendance/1/course123/lesson456?otp=123456",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "users", "mark-attendance", "1", "course123", "lesson456"],
+              "query": [
+                {
+                  "key": "otp",
+                  "value": "123456"
+                }
+              ]
+            },
+            "description": "Marks attendance for a student using OTP."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Course Management",
+      "item": [
+        {
+          "name": "Create Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/1/create?title=Java Programming&description=Intro to Java&duration=40",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "1", "create"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "Java Programming"
+                },
+                {
+                  "key": "description",
+                  "value": "Intro to Java"
+                },
+                {
+                  "key": "duration",
+                  "value": "40"
+                }
+              ]
+            },
+            "description": "Creates a new course (admin action)."
+          }
+        },
+        {
+          "name": "Update Course",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/1/course123/update?title=Advanced Java&description=Advanced topics&duration=50",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "1", "course123", "update"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "Advanced Java"
+                },
+                {
+                  "key": "description",
+                  "value": "Advanced topics"
+                },
+                {
+                  "key": "duration",
+                  "value": "50"
+                }
+              ]
+            },
+            "description": "Updates an existing course (admin action)."
+          }
+        },
+        {
+          "name": "Delete Course",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/1/course123/delete",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "1", "course123", "delete"]
+            },
+            "description": "Deletes a course (admin action)."
+          }
+        },
+        {
+          "name": "Add Media to Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/course123/media?mediaFile=lecture.mp4",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "course123", "media"],
+              "query": [
+                {
+                  "key": "mediaFile",
+                  "value": "lecture.mp4"
+                }
+              ]
+            },
+            "description": "Adds a media file to a course."
+          }
+        },
+        {
+          "name": "Add Lesson to Course",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/course123/lessons?title=Introduction&content=Lesson content",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "course123", "lessons"],
+              "query": [
+                {
+                  "key": "title",
+                  "value": "Introduction"
+                },
+                {
+                  "key": "content",
+                  "value": "Lesson content"
+                }
+              ]
+            },
+            "description": "Adds a lesson to a course."
+          }
+        },
+        {
+          "name": "Get Lesson Attendance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/course123/lessons/lesson456/attendance",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "course123", "lessons", "lesson456", "attendance"]
+            },
+            "description": "Retrieves attendance for a lesson."
+          }
+        },
+        {
+          "name": "Get All Courses",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses",
+              "host": ["http://localhost:8080"],
+              "path": ["courses"]
+            },
+            "description": "Retrieves all courses."
+          }
+        },
+        {
+          "name": "Get Enrolled Students",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/course123/students",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "course123", "students"]
+            },
+            "description": "Retrieves enrolled students for a course."
+          }
+        },
+        {
+          "name": "Get Course by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/courses/course123",
+              "host": ["http://localhost:8080"],
+              "path": ["courses", "course123"]
+            },
+            "description": "Retrieves a course by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assessments",
+      "item": [
+        {
+          "name": "Create Quiz",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Java Quiz\", \"totalMarks\": 100, \"num\": 5}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/2/quiz",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "2", "quiz"]
+            },
+            "description": "Creates a quiz (instructor action)."
+          }
+        },
+        {
+          "name": "Submit Quiz Answers",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentId\": 1, \"answers\": {\"1\": \"A\", \"2\": \"B\"}}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/quiz/1/submit",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "quiz", "1", "submit"]
+            },
+            "description": "Submits quiz answers (student action)."
+          }
+        },
+        {
+          "name": "Add Questions to Quiz",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[{\"id\": 1, \"text\": \"What is Java?\", \"options\": [\"A\", \"B\", \"C\"], \"correctAnswer\": \"A\"}]"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/2/create/questions",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "2", "create", "questions"]
+            },
+            "description": "Adds questions to the question bank (instructor action)."
+          }
+        },
+        {
+          "name": "Get Quiz by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/quiz/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "quiz", "1"]
+            },
+            "description": "Retrieves a quiz by ID."
+          }
+        },
+        {
+          "name": "Get All Questions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/2/questions",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "2", "questions"]
+            },
+            "description": "Retrieves all questions (instructor action)."
+          }
+        },
+        {
+          "name": "Get All Quizzes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/quizzes",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "quizzes"]
+            },
+            "description": "Retrieves all quizzes."
+          }
+        },
+        {
+          "name": "Create Assignment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"title\": \"Java Project\", \"description\": \"Build a Java app\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/2/assignment",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "2", "assignment"]
+            },
+            "description": "Creates an assignment (instructor action)."
+          }
+        },
+        {
+          "name": "Submit Assignment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"fileName\": \"project.java\", \"StudentID\": 1}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/assignment/1/submit",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "assignment", "1", "submit"]
+            },
+            "description": "Submits an assignment (student action)."
+          }
+        },
+        {
+          "name": "Get Assignment by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/assignment/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "assignment", "1"]
+            },
+            "description": "Retrieves an assignment by ID."
+          }
+        },
+        {
+          "name": "Get All Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/assignments",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "assignments"]
+            },
+            "description": "Retrieves all assignments."
+          }
+        },
+        {
+          "name": "Grade Assessment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"studentId\": 1, \"marks\": \"85\", \"feedback\": \"Good work\"}"
+            },
+            "url": {
+              "raw": "http://localhost:8080/api/Assessments/2/grade",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "Assessments", "2", "grade"]
+            },
+            "description": "Grades an assignment (instructor action)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Performance Tracking",
+      "item": [
+        {
+          "name": "Track Student Performance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/performance/2/track/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "performance", "2", "track", "1"]
+            },
+            "description": "Tracks overall student performance (instructor action)."
+          }
+        },
+        {
+          "name": "Track Student Assignments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/performance/2/assignments/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "performance", "2", "assignments", "1"]
+            },
+            "description": "Tracks student assignment performance (instructor action)."
+          }
+        },
+        {
+          "name": "Track Student Quiz Performance",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/api/performance/2/quiz/1",
+              "host": ["http://localhost:8080"],
+              "path": ["api", "performance", "2", "quiz", "1"]
+            },
+            "description": "Tracks student quiz performance (instructor action)."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Notifications",
+      "item": [
+        {
+          "name": "Get Notifications",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notifications/1?onlyUnread=false",
+              "host": ["http://localhost:8080"],
+              "path": ["notifications", "1"],
+              "query": [
+                {
+                  "key": "onlyUnread",
+                  "value": "false"
+                }
+              ]
+            },
+            "description": "Retrieves notifications for a user (set onlyUnread=true for unread only)."
+          }
+        },
+        {
+          "name": "Mark Notification as Read",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8080/notifications/1/1/read",
+              "host": ["http://localhost:8080"],
+              "path": ["notifications", "1", "1", "read"]
+            },
+            "description": "Marks a notification as read."
+          }
+        }
+      ]
+    }
+  ]
+}
